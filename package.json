@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/snipercoder96/CSE341-course#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongodb": "^7.4.0"
