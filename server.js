@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const routers = require('./routes/index');
-const mongoDb = require("./db/connection");
+const mongoDb = require("./models/db/connection");
 
 const PORT = process.env.PORT || 3000;
 

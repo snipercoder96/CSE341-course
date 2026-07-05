@@ -1,4 +1,4 @@
-const mongoDb = require('../db/connection');
+const mongoDb = require('../models/db/connection');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllUsers = async (req, res) => {
