@@ -14,7 +14,7 @@ const app = express();
     try {
         await mongoDb.initDb();
         app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`Server is running on port: http://localhost:${PORT}/`);
         });
     } catch (err) {
         console.error('Failed to start server:', err);
