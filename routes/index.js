@@ -8,4 +8,4 @@ routes.get('/', serverControllers.lesson1);
 
 routes.get('/users', usersController.getAllUsers); // Ensure to import using common.js
 routes.get('/users/:id', usersController.getsingleUser); // Ensure to import using common.js
-module.exports = routes;
+module.exports = routes; // exported to default
