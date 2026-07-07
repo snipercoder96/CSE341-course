@@ -8,4 +8,10 @@ routes.get('/', serverControllers.lesson1);
 
 routes.get('/users', usersController.getAllUsers); // Ensure to import using common.js
 routes.get('/users/:id', usersController.getsingleUser); // Ensure to import using common.js
+
+// example endpoint for testing CRUD operations
+routes.post('/example', serverControllers.addNewPost); // Ensure to import using common.js
+routes.get('/example', serverControllers.viewAllPosts); // Ensure to import using common.js
+routes.put('/example/:id', serverControllers.updatePost); // Ensure to import using common.js
+routes.delete('/example/:id', serverControllers.deletePost); // Ensure to import using common.js
 module.exports = routes; // exported to default

@@ -1,3 +1,77 @@
+const mongoDb = require('../models/db/connection');
+const ObjectId = require('mongodb').ObjectId;// Import ObjectId from mongoose if needed for MongoDB operations
+
+/* -----------Example CRUD Operations------------- */
+const addNewPost = async (req, res) => {
+    try {
+        const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+
+        const newPost = {
+            firstName,
+            lastName,
+            email,
+            favoriteColor,
+            birthday: birthday ? new Date(birthday) : undefined,
+            createdAt: new Date()
+        };
+
+        const result = await mongoDb.getDb().collection('posts').insertOne(newPost);
+        res.status(200).json({ _id: result.insertedId, ...newPost });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const viewAllPosts = async (req, res) => {
+    try {
+        const posts = await mongoDb.getDb().collection('posts').find().toArray();
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const updatePost = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { firstName, lastName, email, favoriteColor, birthday } = req.body;
+
+        const result = await mongoDb.getDb().collection('posts').findOneAndUpdate(
+            { _id: new ObjectId(id) },
+            {
+                $set: {
+                    firstName,
+                    lastName,
+                    email,
+                    favoriteColor,
+                    birthday: birthday ? new Date(birthday) : undefined
+                }
+            },
+            { returnDocument: 'after' }
+        );
+
+        if (!result) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const deletePost = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await mongoDb.getDb().collection('posts').findOneAndDelete(
+            { _id: new ObjectId(id) }
+        );
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+/* ---------------------------------------------------------------------------------- */
 const lesson1 = (req, res) => {
     res.send("hello CSE341");
 };
@@ -29,5 +103,5 @@ const getProfessional = (req, res) => {
 
 
 module.exports = {
-    lesson1, getProfessional
+    lesson1, getProfessional, addNewPost, viewAllPosts, updatePost, deletePost
 };
