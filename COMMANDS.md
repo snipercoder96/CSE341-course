@@ -1,0 +1,4 @@
+- npm run lint → Run ESLint to check for issues
+- npm run lint:fix → Auto-fix issues with ESLint
+- npm run format → Format code with Prettier
+- npm run format:check → Verify formatting without changing files
