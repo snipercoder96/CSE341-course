@@ -16,7 +16,7 @@ const addNewPost = async (req, res) => {
         };
 
         const result = await mongoDb.getDb().collection('posts').insertOne(newPost);
-        res.status(200).json({ _id: result.insertedId, ...newPost });
+        res.status(201).json({ _id: result.insertedId, ...newPost }); //concatenate the insertedId with the newPost object to return the complete post data
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
