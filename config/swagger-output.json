@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "COntacts API",
+    "title": "Contacts API",
     "description": "An API for managing contacts, allowing users to create, read, update, and delete contact information.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-course-0ti4.onrender.com",
   "basePath": "/",
   "tags": [
     {
@@ -14,55 +14,48 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/contacts": {
       "post": {
-        "description": "Creates a new contact with the provided information.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create a new contact",
+        "description": "Adds a new contact to the database.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Contact information",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "john"
-                },
-                "lastName": {
-                  "example": "doe"
-                },
-                "email": {
-                  "example": "john.doe@example.com"
-                },
-                "favoriteColor": {
-                  "example": "blue"
-                },
-                "birthday": {
-                  "example": "1990-01-01"
-                }
-              }
+              "$ref": "#/definitions/ContactInput"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Contact created successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid request"
           }
         }
       },
       "get": {
-        "description": "Retrieves all contacts.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get all contacts",
+        "description": "Returns every contact stored in the database.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successful operation"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid request"
           },
           "404": {
             "description": "Not Found"
@@ -72,92 +65,92 @@
     },
     "/contacts/{id}": {
       "get": {
-        "description": "Retrieves a specific contact by ID.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get one contact",
+        "description": "Returns a single contact by its ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Contact found"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Contact not found"
           }
         }
       },
       "put": {
-        "description": "Updates an existing contact with the provided information.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update a contact",
+        "description": "Updates an existing contact by ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Fields to update",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "john"
-                },
-                "lastName": {
-                  "example": "doe"
-                },
-                "email": {
-                  "example": "john.doe@example.com"
-                },
-                "favoriteColor": {
-                  "example": "blue"
-                },
-                "birthday": {
-                  "example": "1990-01-01"
-                }
-              }
+              "$ref": "#/definitions/ContactInput"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Contact updated successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Contact not found"
           }
         }
       },
       "delete": {
-        "description": "Deletes a specific contact by ID.",
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete a contact",
+        "description": "Deletes a contact from the database by ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Contact deleted successfully"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid request"
           },
           "404": {
-            "description": "Not Found"
+            "description": "Contact not found"
           }
         }
       }
@@ -167,203 +160,58 @@
     "ContactInput": {
       "type": "object",
       "properties": {
-        "type": {
+        "firstName": {
           "type": "string",
-          "example": "object"
+          "example": "John"
         },
-        "required": {
-          "type": "array",
-          "example": [
-            "firstName",
-            "lastName",
-            "email"
-          ],
-          "items": {
-            "type": "string"
-          }
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "firstName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "John"
-                }
-              }
-            },
-            "lastName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Doe"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "john@example.com"
-                }
-              }
-            },
-            "favoriteColor": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Blue"
-                }
-              }
-            },
-            "birthday": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "format": {
-                  "type": "string",
-                  "example": "date"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "1990-01-01"
-                }
-              }
-            }
-          }
+        "email": {
+          "type": "string",
+          "example": "john@example.com"
+        },
+        "favoriteColor": {
+          "type": "string",
+          "example": "Blue"
+        },
+        "birthday": {
+          "type": "string",
+          "example": "1990-01-01"
         }
       }
     },
     "Contact": {
       "type": "object",
       "properties": {
-        "type": {
+        "_id": {
           "type": "string",
-          "example": "object"
+          "example": "64c1f0b2a5d9e2c3b4a5d6e7"
         },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "64c1f0b2a5d9e2c3b4a5d6e7"
-                }
-              }
-            },
-            "firstName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "John"
-                }
-              }
-            },
-            "lastName": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Doe"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "john@example.com"
-                }
-              }
-            },
-            "favoriteColor": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "Blue"
-                }
-              }
-            },
-            "birthday": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "format": {
-                  "type": "string",
-                  "example": "date"
-                },
-                "example": {
-                  "type": "string",
-                  "example": "1990-01-01"
-                }
-              }
-            },
-            "createdAt": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "format": {
-                  "type": "string",
-                  "example": "date-time"
-                }
-              }
-            }
-          }
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "email": {
+          "type": "string",
+          "example": "john@example.com"
+        },
+        "favoriteColor": {
+          "type": "string",
+          "example": "Blue"
+        },
+        "birthday": {
+          "type": "string",
+          "example": "1990-01-01"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-01-01T12:00:00.000Z"
         }
       }
     }

@@ -1,0 +1,33 @@
+@baseUrl = https://cse341-course-0ti4.onrender.com
+
+### Get all contacts
+GET {{baseUrl}}/contacts
+
+### Get a single contact by ID
+GET {{baseUrl}}/contacts/6a50e46ac1af850e25ad118e
+
+### Create a new contact
+POST {{baseUrl}}/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1992-05-14"
+}
+
+### Update an existing contact
+PUT {{baseUrl}}/contacts/6a525a41241144cac053abbe
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "Purple",
+  "birthday": "1992-05-14"
+}
+### Delete a contact
+DELETE {{baseUrl}}/contacts/6a525a41241144cac053abbe
