@@ -6,7 +6,10 @@ const contactsRouter = require('./routes/contacts');
 const mongoDb = require('./models/db/connection');
 const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
+const { errors: celebrateErrors } = require('celebrate');
 const swaggerFile = require('./config/swagger-output.json');
+const rpcRouter = require('./routes/rpc');
+const { errors, globalErrors } = require('./controllers/errors');
 
 const PORT = process.env.PORT || 3000;
 
@@ -38,3 +41,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(routers);
 app.use(contactsRouter);
+app.use(rpcRouter);
+app.use(celebrateErrors()); // W03 Example approach to implement RPC (Remote Procedure Call) using Express.js and JSON-RPC 2.0 specification
+app.use(errors);
+app.use(globalErrors);

@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Update an existing contact
-PUT {{baseUrl}}/contacts/6a525a41241144cac053abbe
+PUT {{baseUrl}}/contacts/6a526aa8b677d3fe0dd063d9
 Content-Type: application/json
 
 {
@@ -30,4 +30,4 @@ Content-Type: application/json
   "birthday": "1992-05-14"
 }
 ### Delete a contact
-DELETE {{baseUrl}}/contacts/6a525a41241144cac053abbe
+DELETE {{baseUrl}}/contacts/6a526aa8b677d3fe0dd063d9

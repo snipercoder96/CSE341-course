@@ -1,8 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const { celebrate, Joi, Segments } = require('celebrate');
 const contactServers = require('../controllers/contacts');
 
-router.post('/contacts', (req, res, next) => {
+const contactBodySchema = Joi.object({
+    firstName: Joi.string().trim().required(),
+    lastName: Joi.string().trim().required(),
+    email: Joi.string().trim().email().required(),
+    favoriteColor: Joi.string().trim().required(),
+    birthday: Joi.string().allow('').optional(),
+}).unknown(true);
+
+const validateContactBody = celebrate({
+    [Segments.BODY]: contactBodySchema,
+});
+
+router.post('/contacts', validateContactBody, (req, res, next) => {
     /*
         #swagger.tags = ['Contacts']
         #swagger.summary = 'Create a new contact'
@@ -43,7 +56,7 @@ router.get('/contacts/:id', (req, res, next) => {
     return contactServers.viewSecificContact(req, res, next);
 });
 
-router.put('/contacts/:id', (req, res, next) => {
+router.put('/contacts/:id', validateContactBody, (req, res, next) => {
     /*
         #swagger.tags = ['Contacts']
         #swagger.summary = 'Update a contact'
